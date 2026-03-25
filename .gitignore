@@ -1,0 +1,14 @@
+# Ignorar contraseñas y secretos
+.env
+
+# Ignorar el entorno virtual de Python y cachés
+.venv/
+__pycache__/
+
+# RED DE SEGURIDAD: Ignorar datos generados por si se guardan aquí por error
+*.csv
+*.docx
+*.jpg
+*.jpeg
+*.png
+*.txt
