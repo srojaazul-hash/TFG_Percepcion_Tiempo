@@ -43,24 +43,27 @@ config_estricta = types.GenerateContentConfig(
 )
 
 # ==========================================
-# PROMPT DE EXTRACCIÓN (RESTRICCIÓN FILOLÓGICA EXTREMA)
+# PROMPT DE EXTRACCIÓN (RESTRICCIÓN FILOLÓGICA 1910-1920)
 # ==========================================
 prompt_extraccion = """
-Misión: Transcripción filológica estricta.
+Misión: Transcripción filológica estricta de textos históricos (1910-1920).
 
-Vas a recibir la imagen de una página de un libro. El texto es interlineal: una línea impresa en Kikamba (alfabeto de Lundell) e inmediatamente debajo su traducción literal al inglés en letra más pequeña.
+Vas a recibir la imagen de una página de un libro. El texto es interlineal: una línea impresa en Kikamba antiguo e inmediatamente debajo su traducción al inglés.
 
 REGLAS DE ORO:
-1. EXTRACCIÓN VISUAL (LÍNEA A LÍNEA): Está absolutamente PROHIBIDO agrupar oraciones. Debes extraer el texto exactamente como está impreso físicamente. Cada línea visual de la imagen debe ser exactamente un elemento en tu lista. Si una línea termina a mitad de una palabra, córtala ahí.
-2. CHULETA DE CARACTERES FONÉTICOS: Está PROHIBIDO normalizar los símbolos a letras latinas comunes. Debes usar exactamente los caracteres impresos. Presta atención a estos símbolos críticos presentes en el texto:
-   - Consonantes especiales: ꝑ (p con raya en el tallo), ŋ (letra eng), ñ, ṣ (s con punto abajo), ṭ, ḍ, ḷ, ṃ, ṇ, y, yy.
-   - Vocales especiales: ĩ, ũ, æ, ə
+1. EXTRACCIÓN VISUAL (LÍNEA A LÍNEA): Está absolutamente PROHIBIDO agrupar oraciones. Extrae el texto exactamente como está impreso físicamente. Cada línea visual de la imagen debe ser un elemento en tu lista. Si una línea termina a mitad de una palabra, córtala ahí.
+2. ORTOGRAFÍA HISTÓRICA INTACTA: Está estrictamente PROHIBIDO normalizar, corregir o modernizar la ortografía. Debes conservar las inconsistencias de los etnógrafos de 1910. 
+   ATENCIÓN OBLIGATORIA A ESTOS CARACTERES:
+   - Vocales antiguas: 'æ' (no la conviertas en e), 'ı' (i sin punto, no le pongas punto), 'ε', 'ə'.
+   - Consonantes y diacríticos: 'ꝑ' (p con raya), 'ŋ' (letra eng, no pongas ng), 'ñ', 'ṣ', 'ṭ', 'ḍ', 'ḷ', 'ṃ', 'ṇ', 'y', 'yy'.
+   - Variantes dialectales: Mantén el uso de las letras 'c' y 'r' exactamente donde aparezcan, no las elimines.
+   - Vocales múltiples: Respeta las secuencias largas de vocales juntas (ej. uua, uaa) sin intentar arreglarlas.
 3. FORMATO DE SALIDA: Extrae todas las líneas físicas de Kikamba por un lado, y todas las líneas físicas de Inglés por otro, manteniendo el orden cronológico de arriba a abajo.
 
 Devuelve ESTRICTAMENTE este JSON:
 {
-  "kikamba": ["línea visual 1 en kikamba", "línea visual 2 en kikamba", ...],
-  "ingles": ["línea visual 1 en inglés", "línea visual 2 en inglés", ...]
+  "kikamba": ["línea visual 1 kikamba", "línea visual 2 kikamba", ...],
+  "ingles": ["línea visual 1 inglés", "línea visual 2 inglés", ...]
 }
 Si no hay texto de un idioma, devuelve [].
 """
